@@ -2,59 +2,305 @@
     box-sizing: border-box;
 }
 body{
-    margin: 0;
+    margin: 0px;
 }
-header{
-    background-color: hsl(0, 0%, 85%);
-    text-align: center;
-    padding: 25px;
-}
-.navbar{
-    background-color: hsl(0, 0%, 16%);
-    height: 50px;
-}
-aside{
-    width: 20%;
-    float: left;
-    padding: 10px;
-}
-section{
-    width: 40%;
-    float: left;
-    padding: 10px;
-}
-article{
-    width: 40%;
-    float: left;
-    padding: 10px;
-}
-footer{
-    display: block;
-    clear: both;
-    background-color: hsl(0, 0%, 85%);
-    text-align: center;
-    padding: 25px;
-}
+
 @media screen and (max-width:600px) {
     aside, section, article{
         width: 100%;
     }
 }
 
-.gallery{
-    display: inline-block;
-    border: 1px solid hsl(0, 0%, 60%);
-    margin: 5px;
-    width: 200px;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  z-index: 1000;
+  margin: 0;
+  padding: 0 40px;          /* Adds breathing room from the screen edges */
+  box-sizing: border-box;
+  display: flex;            /* Puts logo and links on the SAME horizontal row */
+  align-items: center;      /* Vertically aligns logo and links to the same height */
+  justify-content: ; /* Pushes logo to left, links to right */
 }
-.gallery .description {
-    padding: 10px;
+
+.navbar ul{
+    list-style: none;
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar a{
+    color: gray;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
     text-align: center;
 }
-.gallery:hover{
-    border: 1px solid hsl(0, 0%, 20%);
+.navbar a:hover{
+    color: white;
 }
-.gallery img{
-    width: 100%;
-    height: auto;
+.nav-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+
+.hero-image {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* 100% of viewport height */
+  background: url("img/all3.jpg") no-repeat center center/cover;
+  
+  /* Positions text at the bottom left like SpaceX */
+  display: flex;
+  align-items: flex-start; 
+  padding: 40px 80px;
+}
+
+.hero-content {
+  color: #ffffff;
+  max-width: 550px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #d1d5db;
+  margin-bottom: 24px;
+}
+
+.v1-image {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* 100% of viewport height */
+  background: url("img/v1.jpg") no-repeat center center/cover;
+  
+  /* Positions text at the bottom left like SpaceX */
+  display: flex;
+  align-items: flex-end; 
+  padding: 40px 80px;
+}
+
+  .v1-content {
+  color: #ffffff;
+  max-width: 550px;
+}
+
+.v1-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.v1-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #d1d5db;
+  margin-bottom: 24px;
+}
+/* SpaceX style transparent bordered button */
+.btn-watch {
+  display: inline-block;
+  padding: 12px 28px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-watch:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+/* Base Footer Container */
+.site-footer {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 60px 80px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Clear list bullet points and default margin/padding */
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer a {
+  text-decoration: none;
+  color: #a1a1aa;
+  transition: color 0.2s ease;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+/* Headings (COMPANY, WORK WITH US, SOCIAL, CONTACT) */
+.site-footer h4 {
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #71717a;
+  margin: 0 0 20px 0;
+}
+
+/* Top Section Layout */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 70px;
+}
+
+.footer-brand .brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.footer-nav-groups {
+  display: flex;
+  gap: 80px;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+  font-size: 0.88rem;
+}
+
+/* Bottom Section Layout */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid #18181b;
+  padding-top: 40px;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #e4e4e7;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.legal-links li {
+  margin-bottom: 4px;
+}
+
+.legal-links a {
+  font-size: 0.72rem;
+  color: #71717a;
+}
+
+.legal-links a:hover {
+  color: #d4d4d8;
+}
+
+.contact-info {
+  text-align: right;
+}
+
+.contact-info .email-link {
+  font-size: 0.88rem;
+  color: #ffffff;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* Makes overscroll area black instead of white */
+  overscroll-behavior-y: none; /* Stops the elastic rubber-band bounce in Safari */
+}
+
+/* Base styles shared by all full-screen sections */
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Fills the full browser screen */
+  display: flex;
+  align-items: flex-end; /* Pins content to the bottom */
+  padding: 60px 80px;
+  box-sizing: border-box;
+}
+
+/* Individual backgrounds for each section */
+.section-orbit {
+  background: url("img/orbit.jpg") no-repeat center center/cover;
+}
+
+.section-starship {
+  background: url("img/starship.jpg") no-repeat center center/cover;
+}
+
+.section-falcon {
+  background: url("img/falcon.jpg") no-repeat center center/cover;
+}
+
+/* Text and button styling */
+.hero-content {
+  color: #ffffff;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #d1d5db;
+  margin-bottom: 24px;
+}
+
+.btn-watch {
+  display: inline-block;
+  padding: 12px 28px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-watch:hover {
+  background-color: #ffffff;
+  color: #000000;
 }
