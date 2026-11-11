@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhotoBox</title>
     <link rel="stylesheet" href="style.css">
+    <title>Game of Life</title>
+    <style>
+        body { background: #121212; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: height; font-family: sans-serif; margin-top: 40px; }
+        canvas { border: 1px solid #333; background: #000; cursor: pointer; }
+        .controls { margin-top: 15px; display: flex; gap: 10px; }
+        button { background: #333; color: #fff; border: none; padding: 8px 16px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #555; }
+    </style>
 </head>
 <body>
 
@@ -21,5 +28,138 @@
     </nav>
 
 
+</body>
+
+<body>
+    <div class="controls">
+    <button id="startBtn">Start</button>
+    <button id="clearBtn">Clear</button>
+    <button id="randomBtn">Randomize</button>
+    
+    <label for="speedSlider" style="display: flex; align-items: center; gap: 8px;">
+        Speed:
+        <!-- Min 1 frame/sec (very slow), Max 60 frames/sec (fast), Default 15 -->
+        <input type="range" id="speedSlider" min="1" max="60" value="15">
+        <span id="speedVal">15 fps</span>
+    </label>
+</div>
+
+    <canvas id="lifeCanvas" width="800" height="600"></canvas>
+    <div class="controls">
+        <button id="startBtn">Start</button>
+        <button id="clearBtn">Clear</button>
+        <button id="randomBtn">Randomize</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('lifeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const resolution = 10;
+        const cols = canvas.width / resolution;
+        const rows = canvas.height / resolution;
+
+        let grid = makeGrid();
+        let running = false;
+        let intervalId = null;
+
+        function makeGrid() {
+            return new Array(cols).fill(null)
+                .map(() => new Array(rows).fill(0));
+        }
+
+        function randomizeGrid() {
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    grid[i][j] = Math.random() > 0.85 ? 1 : 0;
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    if (grid[i][j] === 1) {
+                        ctx.fillStyle = '#00FF66';
+                        ctx.fillRect(i * resolution, j * resolution, resolution - 1, resolution - 1);
+                    }
+                }
+            }
+        }
+
+        function computeNextGen() {
+            let next = makeGrid();
+
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    let state = grid[i][j];
+                    let neighbors = countNeighbors(grid, i, j);
+
+                    if (state === 0 && neighbors === 3) {
+                        next[i][j] = 1; // Reproduction
+                    } else if (state === 1 && (neighbors < 2 || neighbors > 3)) {
+                        next[i][j] = 0; // Underpopulation or Overpopulation
+                    } else {
+                        next[i][j] = state; // Stasis
+                    }
+                }
+            }
+            grid = next;
+        }
+
+        function countNeighbors(g, x, y) {
+            let sum = 0;
+            for (let i = -1; i < 2; i++) {
+                for (let j = -1; j < 2; j++) {
+                    let col = (x + i + cols) % cols;
+                    let row = (y + j + rows) % rows;
+                    sum += g[col][row];
+                }
+            }
+            sum -= g[x][y]; // Exclude self
+            return sum;
+        }
+
+        function update() {
+            computeNextGen();
+            draw();
+        }
+
+        // Event Listeners
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((e.clientX - rect.left) / resolution);
+            const y = Math.floor((e.clientY - rect.top) / resolution);
+            grid[x][y] = grid[x][y] ? 0 : 1;
+            draw();
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            running = !running;
+            document.getElementById('startBtn').textContent = running ? 'Pause' : 'Start';
+            if (running) {
+                intervalId = setInterval(update, 50);
+            } else {
+                clearInterval(intervalId);
+            }
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            running = false;
+            document.getElementById('startBtn').textContent = 'Start';
+            clearInterval(intervalId);
+            grid = makeGrid();
+            draw();
+        });
+
+        document.getElementById('randomBtn').addEventListener('click', () => {
+            randomizeGrid();
+            draw();
+        });
+
+        randomizeGrid();
+        draw();
+    </script>
 </body>
 </html>
