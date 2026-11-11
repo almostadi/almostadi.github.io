@@ -22,7 +22,7 @@ body{
   box-sizing: border-box;
   display: flex;            /* Puts logo and links on the SAME horizontal row */
   align-items: center;      /* Vertically aligns logo and links to the same height */
-  justify-content: ; /* Pushes logo to left, links to right */
+  justify-content: center; /* Pushes logo to left, links to right */
 }
 
 .navbar ul{
