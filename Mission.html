@@ -6,51 +6,67 @@
     <link rel="stylesheet" href="style.css">
     <title>Game of Life</title>
     <style>
-        body { background: #121212; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: height; font-family: sans-serif; margin-top: 40px; }
-        canvas { border: 1px solid #333; background: #000; cursor: pointer; }
-        .controls { margin-top: 15px; display: flex; gap: 10px; }
-        button { background: #333; color: #fff; border: none; padding: 8px 16px; cursor: pointer; border-radius: 4px; }
-        button:hover { background: #555; }
+        body { 
+            background: #121212; 
+            color: #fff; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: height; 
+            font-family: sans-serif; 
+            margin-top: 40px; 
+        }
+        canvas { 
+            border: 1px solid #333; 
+            background: #000; 
+            cursor: pointer; 
+        }
+        .controls { 
+            margin-top: 15px; 
+            display: flex; 
+            gap: 10px; 
+        }
+        button { 
+            background: #333; 
+            color: #fff; 
+            border: none; 
+            padding: 8px 16px; 
+            cursor: pointer; 
+            border-radius: 4px; 
+        }
+        button:hover { 
+            background: #555; 
+        }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
         <ul>
             <li class="nav-logo">
                 <a href="index.html">
                     <img src="img/Star_Wars_Logo..png" alt="Logo" class="logo-img">
                 </a>
-            <li><a href="R2D2.html">R2D2</a></li>
-            <li><a href="c3po.html">C3PO</a></li>
-            <li><a href="bb28.html">BB28</a></li>
+            <li><a href="Mission.html">Mission</a></li>
+            <li><a href="Newsroom.html">Newsroom</a></li>
+            <li><a href="Careers.html">Careers</a></li>
+            <li><a href="About.html">About</a></li>
         </ul>
     </nav>
-
-
 </body>
-
+<br>
 <body>
+    <canvas id="lifeCanvas" width="1200" height="700"></canvas>
     <div class="controls">
-    <button id="startBtn">Start</button>
-    <button id="clearBtn">Clear</button>
-    <button id="randomBtn">Randomize</button>
-    
-    <label for="speedSlider" style="display: flex; align-items: center; gap: 8px;">
-        Speed:
-        <!-- Min 1 frame/sec (very slow), Max 60 frames/sec (fast), Default 15 -->
-        <input type="range" id="speedSlider" min="1" max="60" value="15">
-        <span id="speedVal">15 fps</span>
-    </label>
-</div>
-
-    <canvas id="lifeCanvas" width="800" height="600"></canvas>
-    <div class="controls">
-        <button id="startBtn">Start</button>
-        <button id="clearBtn">Clear</button>
-        <button id="randomBtn">Randomize</button>
-    </div>
-
+       <button id="startBtn">Start</button>
+       <button id="clearBtn">Clear</button>
+       <button id="randomBtn">Randomize</button>
+       <label for="speedSlider" style="display: flex; align-items: center; gap: 8px;">
+         Speed:
+         <!-- Min 1 frame/sec (very slow), Max 60 frames/sec (fast), Default 15 -->
+         <input type="range" id="speedSlider" min="1" max="60" value="15">
+         <span id="speedVal">1 fps</span>
+       </label>
+    </div> 
     <script>
         const canvas = document.getElementById('lifeCanvas');
         const ctx = canvas.getContext('2d');
